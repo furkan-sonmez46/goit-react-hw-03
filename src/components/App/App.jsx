@@ -1,9 +1,11 @@
 import { useState, useId, useEffect } from 'react'
 import './App.css'
+import Contact from '../Contact/Contact.jsx';
+import '../Contact/Contact.module.css';
 import ContactForm from '../ContactForm/ContactForm.jsx';
 import '../ContactForm/ContactForm.module.css';
-import ContactList from '../ContactList/Contacts/Contacts.jsx';
-import '../ContactList/Contacts/Contacts.module.css';
+import ContactList from '../ContactList/ContactList.jsx';
+import '../ContactList/ContactList.module.css';
 import SearchBox from '../SearchBox/SearchBox.jsx';
 import '../SearchBox/SearchBox.module.css';
 
@@ -17,17 +19,28 @@ function App() {
     ],
   );
 
+const [searchTerm, setSearchTerm] = useState("");
+
+  const addContact = (newContact) => {
+    setContacts([...contacts, { id: Date.now(), ...newContact }]);
+  };
+
+  const deleteContact = (id) => {
+    setContacts(contacts.filter((contact) => contact.id !== id));
+  };
+
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <>
-      <div>
-        <h1>Phonebook</h1>
-        <ContactForm />
-        <SearchBox />
-        <ContactList />
-      </div>
-    </>
+    <div>
+      <h1>Phonebook</h1>
+      <ContactForm onAddContact={addContact} />
+      <SearchBox searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <ContactList contacts={filteredContacts} onDeleteContact={deleteContact} />
+    </div>
   );
-}
+};
 
 export default App
