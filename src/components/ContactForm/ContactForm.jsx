@@ -10,12 +10,12 @@ const ContactForm = ({ onAddContact }) => {
 
   const validationSchema = Yup.object({
     name: Yup.string()
-      .min(3, 'Minimum 3 karakter olmalı')
-      .max(50, 'Maksimum 50 karakter olabilir')
-      .required('İsim gerekli'),
+      .min(3, 'Must be at least 3 characters')
+          .max(50, 'Must be 50 characters or less')
+      .required('Required'),
     number: Yup.string()
       .matches(/^\d{3}-\d{2}-\d{2}$/, 'Format: 123-45-67')
-      .required('Numara gerekli'),
+      .required('Required'),
   });
 
   const handleSubmit = (values, { resetForm }) => {
