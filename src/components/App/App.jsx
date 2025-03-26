@@ -1,7 +1,5 @@
 import { useState, useId, useEffect } from 'react'
 import './App.css'
-import Contact from '../Contact/Contact.jsx';
-import '../Contact/Contact.module.css';
 import ContactForm from '../ContactForm/ContactForm.jsx';
 import '../ContactForm/ContactForm.module.css';
 import ContactList from '../ContactList/ContactList.jsx';
